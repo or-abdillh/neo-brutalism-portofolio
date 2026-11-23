@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>alex.codes — Full-Stack Web Developer</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Configuration for Custom Neo-Brutalist Tokens -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          },
+          colors: {
+            canvas: '#F7EDE2',
+            surface: '#FFFDF9',
+            ink: '#111111',
+            brutalYellow: '#FDE047',
+            brutalBlue: '#7AA2F7',
+            brutalPink: '#FF7A8A',
+            brutalGreen: '#4ADE80',
+            brutalLime: '#BEF264',
+          },
+          boxShadow: {
+            'brutal-sm': '3px 3px 0px 0px #111111',
+            'brutal': '5px 5px 0px 0px #111111',
+            'brutal-lg': '8px 8px 0px 0px #111111',
+            'brutal-frame': '10px 10px 0px 0px #111111',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Neo-Brutalist Utilities & Animations */
+    body {
+      background-color: #F7EDE2;
+      color: #111111;
+      overflow-x: hidden;
+    }
+
+    .brutal-border {
+      border: 3px solid #111111;
+    }
+
+    .brutal-border-thick {
+      border: 3.5px solid #111111;
+    }
+
+    /* Tactile Button & Card Interactions */
+    .brutal-btn {
+      transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .brutal-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0px 0px #111111;
+    }
+    .brutal-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0px 0px #111111;
+    }
+
+    .brutal-card {
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .brutal-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0px 0px #111111;
+    }
+
+    /* Subtle Floating Animation for Ornaments */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+      50% { transform: translateY(-6px) rotate(var(--rot, 0deg)); }
+    }
+    .animate-float {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+    .animate-float-delayed {
+      animation: floatSlow 5.2s ease-in-out 1.5s infinite;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-brutalYellow selection:text-ink">
+
+  <!-- Outer Canvas Wrapper with Floating Decorative Elements -->
+  <div class="relative min-h-screen pt-10 sm:pt-14 pb-12 px-4 sm:px-8 lg:px-12 overflow-hidden">
+
+    <!-- =========================================================
+         OUTER FLOATING NEO-BRUTALIST ORNAMENTS (MATCHING MOCKUP)
+         ========================================================= -->
+    
+    <!-- Left Edge Blue Semi-Circle Arc (Top-Left) -->
+    <div class="hidden md:block fixed -left-8 top-32 z-0 pointer-events-none" aria-hidden="true">
+      <svg width="90" height="90" viewBox="0 0 90 90" fill="none" style="transform: rotate(25deg);">
+        <path d="M10 45C10 25.67 25.67 10 45 10C64.33 10 80 25.67 80 45H60C60 36.7157 53.2843 30 45 30C36.7157 30 30 36.7157 30 45H10Z" fill="#111111" transform="translate(4, 4)"/>
+        <path d="M10 45C10 25.67 25.67 10 45 10C64.33 10 80 25.67 80 45H60C60 36.7157 53.2843 30 45 30C36.7157 30 30 36.7157 30 45H10Z" fill="#7AA2F7" stroke="#111111" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Left Side Pink Git Branch Circular Badge -->
+    <div class="hidden lg:flex fixed left-3 xl:left-10 top-[54%] z-20 items-center justify-center w-20 h-20 rounded-full bg-brutalPink brutal-border shadow-brutal animate-float" style="--rot: -8deg;" aria-hidden="true">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="3" x2="6" y2="15"></line>
+        <circle cx="18" cy="6" r="3" fill="#111111"></circle>
+        <circle cx="6" cy="18" r="3" fill="#111111"></circle>
+        <path d="M18 9a9 9 0 0 1-9 9"></path>
+      </svg>
+    </div>
+
+    <!-- Left Edge Blue Semi-Circle Arc (Bottom-Left) -->
+    <div class="hidden md:block fixed -left-7 bottom-12 z-0 pointer-events-none" aria-hidden="true">
+      <svg width="96" height="96" viewBox="0 0 96 96" fill="none" style="transform: rotate(-35deg);">
+        <path d="M12 48C12 28.1177 28.1177 12 48 12C67.8823 12 84 28.1177 84 48H62C62 40.268 55.732 34 48 34C40.268 34 34 40.268 34 48H12Z" fill="#111111" transform="translate(4, 4)"/>
+        <path d="M12 48C12 28.1177 28.1177 12 48 12C67.8823 12 84 28.1177 84 48H62C62 40.268 55.732 34 48 34C40.268 34 34 40.268 34 48H12Z" fill="#7AA2F7" stroke="#111111" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Right Edge Pink Semi-Circle Arc -->
+    <div class="hidden md:block fixed -right-7 top-[46%] z-0 pointer-events-none" aria-hidden="true">
+      <svg width="95" height="95" viewBox="0 0 95 95" fill="none" style="transform: rotate(-110deg);">
+        <path d="M12 48C12 28.1177 28.1177 12 48 12C67.8823 12 84 28.1177 84 48H62C62 40.268 55.732 34 48 34C40.268 34 34 40.268 34 48H12Z" fill="#111111" transform="translate(4, 4)"/>
+        <path d="M12 48C12 28.1177 28.1177 12 48 12C67.8823 12 84 28.1177 84 48H62C62 40.268 55.732 34 48 34C40.268 34 34 40.268 34 48H12Z" fill="#FF7A8A" stroke="#111111" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Right Edge Lime-Green Semi-Circle Arc (Bottom-Right) -->
+    <div class="hidden md:block fixed -right-6 bottom-10 z-0 pointer-events-none" aria-hidden="true">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style="transform: rotate(145deg);">
+        <path d="M12 50C12 29.0132 29.0132 12 50 12C70.9868 12 88 29.0132 88 50H64C64 42.268 57.732 36 50 36C42.268 36 36 42.268 36 50H12Z" fill="#111111" transform="translate(4, 4)"/>
+        <path d="M12 50C12 29.0132 29.0132 12 50 12C70.9868 12 88 29.0132 88 50H64C64 42.268 57.732 36 50 36C42.268 36 36 42.268 36 50H12Z" fill="#BEF264" stroke="#111111" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- =========================================================
+         MAIN CENTERED PORTFOLIO CONTAINER FRAME
+         ========================================================= -->
+    <main class="relative z-10 max-w-[1120px] mx-auto bg-surface brutal-border-thick rounded-[32px] shadow-brutal-frame px-6 sm:px-12 lg:px-16 pt-8 pb-16">
+
+      <!-- TOP-OVERLAPPING TILTED BLUE SQUARE BADGE (FIGMA-STYLE GEOMETRIC ICON) -->
+      <div class="hidden sm:flex items-center justify-center w-16 h-16 md:w-[72px] md:h-[72px] bg-brutalBlue brutal-border rounded-2xl shadow-brutal absolute -top-8 left-[36%] md:left-[38%] -rotate-12 z-20 animate-float" style="--rot: -12deg;" title="UI/UX & Design Systems">
+        <svg width="34" height="44" viewBox="0 0 38 57" fill="none">
+          <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#38BDF8" stroke="#111111" stroke-width="3"/>
+          <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#4ADE80" stroke="#111111" stroke-width="3"/>
+          <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FB7185" stroke="#111111" stroke-width="3"/>
+          <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F97316" stroke="#111111" stroke-width="3"/>
+          <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#C084FC" stroke="#111111" stroke-width="3"/>
+        </svg>
+      </div>
+
+      <!-- TOP-RIGHT FLOATING "Alex" PILL BADGE + CURSOR ARROW -->
+      <div class="hidden md:flex items-center gap-2 absolute top-11 -right-8 lg:-right-12 z-30 animate-float-delayed" style="--rot: 0deg;">
+        <!-- Small Pointing Blue Triangle Cursor -->
+        <svg class="translate-y-7 -rotate-12 drop-shadow-[2px_2px_0px_#111111]" width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M4 3L20 11L12 14L9 21L4 3Z" fill="#7AA2F7" stroke="#111111" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <!-- Pill Badge -->
+        <div class="bg-brutalBlue brutal-border rounded-full px-7 py-2.5 shadow-brutal font-extrabold text-xl tracking-tight text-ink">
+          Alex
+        </div>
+      </div>
+
+      <!-- =========================================================
+           HEADER / NAVBAR
+           ========================================================= -->
+      <header class="flex items-center justify-between py-2 mb-12 md:mb-16">
+        <!-- Brand Logo: Yellow Geometric "a" + alex.codes -->
+        <a href="#" class="inline-flex items-center gap-3 group">
+          <div class="w-9 h-9 bg-brutalYellow border-[2.5px] border-ink rounded-lg shadow-brutal-sm flex items-center justify-center transition-transform group-hover:-rotate-6">
+            <svg width="20" height="22" viewBox="0 0 24 26" fill="none">
+              <path d="M7 6C7 4.34315 8.34315 3 10 3H15C17.7614 3 20 5.23858 20 8V21C20 22.1046 19.1046 23 18 23H15.5V20.5C14.2 22.1 12.2 23 9.8 23C6.2 23 3.5 20.5 3.5 17C3.5 13.3 6.4 11 10.6 11H14.5V9.2C14.5 7.9 13.5 7 12.1 7H7V6ZM14.5 14.5H11C9.2 14.5 8 15.5 8 16.9C8 18.3 9.2 19.3 11 19.3C13 19.3 14.5 18 14.5 16.1V14.5Z" fill="#FDE047" stroke="#111111" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-ink">alex.codes</span>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav class="hidden sm:flex items-center gap-7 md:gap-9 md:mr-28 font-bold text-sm md:text-[15px]">
+          <a href="#about" class="relative py-1 hover:text-ink after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[3px] after:bg-brutalYellow after:transition-all hover:after:w-full">About</a>
+          <a href="#services" class="relative py-1 hover:text-ink after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[3px] after:bg-brutalBlue after:transition-all hover:after:w-full">What I Do</a>
+          <a href="#work" class="relative py-1 hover:text-ink after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[3px] after:bg-brutalPink after:transition-all hover:after:w-full">My Work</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" aria-label="Toggle Menu" class="sm:hidden p-2 bg-brutalYellow border-2 border-ink rounded-lg shadow-brutal-sm active:translate-x-[2px] active:translate-y-[2px]">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.5" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <!-- Mobile Dropdown Nav -->
+      <div id="mobile-menu" class="hidden sm:hidden mb-8 p-4 bg-canvas brutal-border rounded-2xl shadow-brutal space-y-3 font-bold">
+        <a href="#about" class="block py-1.5 px-3 rounded-lg hover:bg-brutalYellow">About</a>
+        <a href="#services" class="block py-1.5 px-3 rounded-lg hover:bg-brutalBlue">What I Do</a>
+        <a href="#work" class="block py-1.5 px-3 rounded-lg hover:bg-brutalPink">My Work</a>
+      </div>
+
+      <!-- =========================================================
+           HERO SECTION (TWO-COLUMN LAYOUT)
+           ========================================================= -->
+      <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mb-24 md:mb-28">
+        
+        <!-- Left Column: Intro, Bold Display Headline, Subheadline, CTA -->
+        <div class="lg:col-span-7 space-y-6">
+          <p class="text-sm sm:text-base font-semibold text-neutral-700 tracking-wide">
+            Hi, my name is Alex.
+          </p>
+          
+          <h1 class="font-display font-bold text-5xl sm:text-6xl md:text-[68px] leading-[1.02] tracking-tight text-ink uppercase">
+            I BUILD FOR <br class="hidden sm:inline" />
+            THE WEB.
+          </h1>
+          
+          <p class="text-base sm:text-[17px] leading-relaxed text-neutral-700 max-w-lg font-medium">
+            I'm a Full-stack Web Developer specializing in building high-performance web applications, interactive experiences, and robust APIs.
+          </p>
+          
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a href="#work" class="brutal-btn inline-flex items-center justify-center bg-brutalYellow brutal-border rounded-xl px-8 py-3.5 font-extrabold text-base text-ink shadow-brutal">
+              See my work
+            </a>
+            <a href="#contact" class="brutal-btn inline-flex items-center justify-center bg-white brutal-border rounded-xl px-6 py-3.5 font-bold text-base text-ink shadow-brutal-sm">
+              Get in touch
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Custom Shield/Pentagon Portrait Frame & Floating Badges -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="relative w-[290px] sm:w-[330px] h-[340px] sm:h-[375px] select-none">
+            
+            <!-- SVG Shield/Pentagon Frame with Hard Shadow & Masked Grayscale Developer Photo -->
+            <svg viewBox="0 0 340 380" class="w-full h-full overflow-visible">
+              <defs>
+                <!-- Shield Path Definition -->
+                <path id="shield-shape" d="M 38 68 Q 38 42 64 42 L 276 42 Q 302 42 302 68 L 302 268 Q 302 288 284 298 L 184 354 Q 170 362 156 354 L 56 298 Q 38 288 38 268 Z" />
+                
+                <!-- Clip path extending above top edge so portrait head pops out cleanly -->
+                <clipPath id="portrait-clip">
+                  <path d="M 38 0 L 302 0 L 302 268 Q 302 288 284 298 L 184 354 Q 170 362 156 354 L 56 298 Q 38 288 38 268 Z" />
+                </clipPath>
+              </defs>
+
+              <!-- Hard Black Offset Shadow -->
+              <use href="#shield-shape" fill="#111111" transform="translate(8, 8)" />
+
+              <!-- Coral-Pink Shield Background -->
+              <use href="#shield-shape" fill="#FF7A8A" />
+
+              <!-- Masked Developer Portrait (Grayscale matching mockup) -->
+              <g clip-path="url(#portrait-clip)">
+                <image 
+                  href="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" 
+                  x="32" 
+                  y="10" 
+                  width="276" 
+                  height="350" 
+                  preserveAspectRatio="xMidYTop slice"
+                  style="filter: grayscale(100%) contrast(1.08);"
+                />
+              </g>
+
+              <!-- Thick 3.5px Solid Black Shield Border Overlay -->
+              <use href="#shield-shape" fill="none" stroke="#111111" stroke-width="4" stroke-linejoin="round" />
+            </svg>
+
+            <!-- Floating Top-Left Layered Terminal + Yellow Code Badge -->
+            <div class="absolute -top-2 -left-4 sm:-left-6 z-20">
+              <!-- Back Blue Terminal Window -->
+              <div class="w-16 h-12 bg-brutalBlue brutal-border rounded-lg shadow-brutal-sm p-1.5 flex flex-col justify-between">
+                <div class="flex gap-1 border-b-2 border-ink pb-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-ink"></span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-ink"></span>
+                </div>
+                <span class="font-mono text-[10px] font-bold leading-none">&gt;_</span>
+              </div>
+              <!-- Front Overlapping Yellow </> Badge -->
+              <div class="w-14 h-12 bg-brutalYellow brutal-border rounded-lg shadow-brutal-sm flex items-center justify-center font-mono font-extrabold text-base text-ink translate-x-6 -translate-y-5">
+                &lt;/&gt;
+              </div>
+            </div>
+
+            <!-- Floating Right Green Circular </> Badge -->
+            <div class="absolute top-[42%] -right-4 sm:-right-6 z-20 w-16 h-16 rounded-full bg-brutalGreen brutal-border shadow-brutal flex items-center justify-center font-mono font-extrabold text-lg text-ink animate-float" style="--rot: 6deg;">
+              &lt;/&gt;
+            </div>
+
+            <!-- Floating Bottom-Right Green "Available for Hire" Pill Badge -->
+            <div class="absolute bottom-7 -right-2 sm:-right-5 z-20 bg-brutalGreen border-[2.5px] border-ink rounded-full px-3.5 py-1.5 shadow-brutal-sm inline-flex items-center gap-1.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+              <span class="font-extrabold text-xs text-ink tracking-tight whitespace-nowrap">Available for Hire</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           "WHAT I CAN DO FOR YOU" SERVICES SECTION
+           ========================================================= -->
+      <section id="services" class="mb-24 md:mb-28">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+          <p class="text-xs sm:text-sm font-bold text-neutral-600 mb-1.5">
+            Passion led us here
+          </p>
+          <h2 class="font-extrabold text-3xl sm:text-4xl tracking-tight text-ink">
+            What I can do for you
+          </h2>
+        </div>
+
+        <!-- 3-Column Service Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+          
+          <!-- Card 1: Frontend Development -->
+          <article class="brutal-card bg-white brutal-border rounded-2xl p-7 shadow-brutal flex flex-col justify-between">
+            <div>
+              <!-- Custom Yellow Browser/Code Window SVG -->
+              <div class="mb-6 inline-block">
+                <svg width="72" height="58" viewBox="0 0 72 58" fill="none">
+                  <rect x="4" y="4" width="66" height="52" rx="8" fill="#111111"/>
+                  <rect x="1.5" y="1.5" width="66" height="52" rx="8" fill="#FDE047" stroke="#111111" stroke-width="3"/>
+                  <line x1="1.5" y1="13" x2="67.5" y2="13" stroke="#111111" stroke-width="2.5"/>
+                  <circle cx="9" cy="7.5" r="1.8" fill="#111111"/>
+                  <circle cx="15" cy="7.5" r="1.8" fill="#111111"/>
+                  <circle cx="21" cy="7.5" r="1.8" fill="#111111"/>
+                  <!-- Code lines -->
+                  <path d="M13 22L9 25L13 28" stroke="#111111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M25 22L29 25L25 28" stroke="#111111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="17" y1="25" x2="21" y2="25" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+                  <line x1="10" y1="34" x2="48" y2="34" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+                  <line x1="16" y1="40" x2="56" y2="40" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+                  <path d="M13 44L9 46.5L13 49" stroke="#111111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M21 44L25 46.5L21 49" stroke="#111111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              
+              <h3 class="font-extrabold text-xl text-ink mb-3">
+                Frontend Development
+              </h3>
+              <p class="text-sm sm:text-[15px] leading-relaxed text-neutral-600 font-medium">
+                I specialize in building responsive, accessible, and interactive user interfaces using modern frameworks like React, Vue, and Tailwind CSS.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 2: Backend & APIs -->
+          <article class="brutal-card bg-white brutal-border rounded-2xl p-7 shadow-brutal flex flex-col justify-between">
+            <div>
+              <!-- Custom Blue & Pink Stacked Database Cylinder SVG -->
+              <div class="mb-6 inline-block">
+                <svg width="64" height="60" viewBox="0 0 64 60" fill="none">
+                  <!-- Shadow -->
+                  <rect x="8" y="10" width="48" height="46" rx="12" fill="#111111"/>
+                  <!-- Bottom Blue Cylinder Body -->
+                  <path d="M6 14V44C6 49.5228 16.7452 54 30 54C43.2548 54 54 49.5228 54 44V14H6Z" fill="#7AA2F7" stroke="#111111" stroke-width="3"/>
+                  <!-- Middle & Bottom Cylinder Rings -->
+                  <path d="M6 34C6 39.5228 16.7452 44 30 44C43.2548 44 54 39.5228 54 34" stroke="#111111" stroke-width="2.8"/>
+                  <path d="M6 24C6 29.5228 16.7452 34 30 34C43.2548 34 54 29.5228 54 24" stroke="#111111" stroke-width="2.8"/>
+                  <!-- Top Pink Ellipse Cap -->
+                  <ellipse cx="30" cy="14" rx="24" ry="9" fill="#FF7A8A" stroke="#111111" stroke-width="3"/>
+                  <!-- Indicator Dots -->
+                  <circle cx="14" cy="29" r="1.8" fill="#111111"/>
+                  <circle cx="14" cy="39" r="1.8" fill="#111111"/>
+                </svg>
+              </div>
+              
+              <h3 class="font-extrabold text-xl text-ink mb-3">
+                Backend &amp; APIs
+              </h3>
+              <p class="text-sm sm:text-[15px] leading-relaxed text-neutral-600 font-medium">
+                I architect scalable server-side systems, RESTful &amp; GraphQL APIs, and optimized relational databases for high-reliability apps.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 3: Performance Opt. -->
+          <article class="brutal-card bg-white brutal-border rounded-2xl p-7 shadow-brutal flex flex-col justify-between">
+            <div>
+              <!-- Custom Mint-Green Speed Gauge Window SVG -->
+              <div class="mb-6 inline-block">
+                <svg width="72" height="58" viewBox="0 0 72 58" fill="none">
+                  <rect x="4" y="4" width="66" height="52" rx="8" fill="#111111"/>
+                  <rect x="1.5" y="1.5" width="66" height="52" rx="8" fill="#4ADE80" stroke="#111111" stroke-width="3"/>
+                  <line x1="1.5" y1="13" x2="67.5" y2="13" stroke="#111111" stroke-width="2.5"/>
+                  <circle cx="9" cy="7.5" r="1.8" fill="#111111"/>
+                  <circle cx="15" cy="7.5" r="1.8" fill="#111111"/>
+                  <circle cx="21" cy="7.5" r="1.8" fill="#111111"/>
+                  <!-- Speedometer Gauge -->
+                  <path d="M16 42C16 31.5066 24.5066 23 35 23C45.4934 23 54 31.5066 54 42" stroke="#111111" stroke-width="2.8" stroke-linecap="round"/>
+                  <line x1="35" y1="23" x2="35" y2="27" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+                  <line x1="22" y1="29" x2="25" y2="32" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+                  <line x1="48" y1="29" x2="45" y2="32" stroke="#111111" stroke-width="2.2" stroke-linecap="round"/>
+                  <!-- Needle pointing fast -->
+                  <line x1="35" y1="42" x2="45" y2="31" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="35" cy="42" r="3.5" fill="#111111"/>
+                </svg>
+              </div>
+              
+              <h3 class="font-extrabold text-xl text-ink mb-3">
+                Performance Opt.
+              </h3>
+              <p class="text-sm sm:text-[15px] leading-relaxed text-neutral-600 font-medium">
+                I audit and optimize Core Web Vitals, bundle sizes, and caching strategies to deliver lightning-fast load times.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           "MY WORK" SELECTED PROJECTS SECTION
+           ========================================================= -->
+      <section id="work" class="mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <p class="text-xs sm:text-sm font-bold text-neutral-600 mb-1">Selected Projects</p>
+            <h2 class="font-extrabold text-3xl sm:text-4xl tracking-tight text-ink">Things I've Built</h2>
+          </div>
+          <span class="inline-flex items-center gap-2 self-start sm:self-auto bg-brutalYellow border-2 border-ink rounded-full px-4 py-1.5 text-xs font-extrabold shadow-brutal-sm">
+            <span>2024 — 2026</span>
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Project 1 -->
+          <article class="brutal-card bg-white brutal-border rounded-2xl overflow-hidden shadow-brutal flex flex-col">
+            <!-- Mock Browser Preview Banner -->
+            <div class="bg-brutalBlue border-b-[3px] border-ink p-6">
+              <div class="bg-surface border-2 border-ink rounded-xl p-4 shadow-brutal-sm">
+                <div class="flex items-center gap-1.5 mb-3">
+                  <span class="w-2.5 h-2.5 rounded-full bg-brutalPink border border-ink"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-brutalYellow border border-ink"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-brutalGreen border border-ink"></span>
+                  <span class="ml-2 text-[11px] font-mono font-bold text-neutral-500">pulseboard.app</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="col-span-2 h-16 bg-brutalYellow/50 border-2 border-ink rounded-lg p-2 flex flex-col justify-between">
+                    <span class="text-[10px] font-extrabold">REALTIME METRICS</span>
+                    <span class="font-display font-bold text-lg">+142.8%</span>
+                  </div>
+                  <div class="h-16 bg-brutalGreen/60 border-2 border-ink rounded-lg p-2 flex flex-col justify-between">
+                    <span class="text-[10px] font-extrabold">UPTIME</span>
+                    <span class="font-mono font-bold text-sm">99.98%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span class="text-xs font-mono font-bold bg-canvas border-2 border-ink px-2.5 py-0.5 rounded-md">Next.js</span>
+                  <span class="text-xs font-mono font-bold bg-canvas border-2 border-ink px-2.5 py-0.5 rounded-md">TypeScript</span>
+                  <span class="text-xs font-mono font-bold bg-canvas border-2 border-ink px-2.5 py-0.5 rounded-md">PostgreSQL</span>
+                </div>
+                <h3 class="font-extrabold text-2xl text-ink mb-2">PulseBoard Analytics</h3>
+                <p class="text-sm text-neutral-600 font-medium leading-relaxed mb-6">
+                  A low-latency SaaS telemetry dashboard processing 50k+ events/sec with custom WebSocket streams and edge caching.
+                </p>
+              </div>
+              <div class="flex items-center gap-3">
+                <button onclick="openProjectModal('PulseBoard Analytics', 'Full-stack telemetry platform built with Next.js App Router, ClickHouse, and WebSockets. Reduced dashboard query latency from 1.2s to 45ms.', ['Next.js', 'TypeScript', 'Tailwind CSS', 'WebSockets'])" class="brutal-btn bg-brutalYellow border-2 border-ink rounded-xl px-4 py-2 font-extrabold text-xs shadow-brutal-sm">
+                  Case Study &rarr;
+                </button>
+                <a href="#work" onclick="openProjectModal('PulseBoard Analytics', 'Live interactive preview available in the case study overview.', ['Next.js', 'TypeScript'])" class="font-bold text-xs underline decoration-2 underline-offset-4 hover:text-neutral-600">
+                  Source Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="brutal-card bg-white brutal-border rounded-2xl overflow-hidden shadow-brutal flex flex-col">
+            <!-- Mock Browser Preview Banner -->
+            <div class="bg-brutalPink border-b-[3px] border-ink p-6">
+              <div class="bg-surface border-2 border-ink rounded-xl p-4 shadow-brutal-sm">
+                <div class="flex items-center gap-1.5 mb-3">
+                  <span class="w-2.5 h-2.5 rounded-full bg-brutalPink border border-ink"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-brutalYellow border border-ink"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-brutalGreen border border-ink"></span>
+                  <span class="ml-2 text-[11px] font-mono font-bold text-neutral-500">kinetix-ui.dev</span>
+                </div>
+                <div class="flex items-center justify-between gap-3 h-16 bg-brutalBlue/30 border-2 border-ink rounded-lg px-3">
+                  <div>
+                    <div class="text-[10px] font-extrabold uppercase">Component Kit</div>
+                    <div class="font-bold text-sm">45+ Accessible Primitives</div>
+                  </div>
+                  <span class="bg-brutalYellow border-2 border-ink rounded-md px-2.5 py-1 text-xs font-extrabold">v2.4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span class="text-xs font-mono font-bold bg-canvas border-2 border-ink px-2.5 py-0.5 rounded-md">React</span>
+                  <span class="text-xs font-mono font-bold bg-canvas border-2 border-ink px-2.5 py-0.5 rounded-md">Tailwind CSS</span>
+                  <span class="text-xs font-mono font-bold bg-canvas border-2 border-ink px-2.5 py-0.5 rounded-md">Radix UI</span>
+                </div>
+                <h3 class="font-extrabold text-2xl text-ink mb-2">Kinetix Neo-Brutal UI</h3>
+                <p class="text-sm text-neutral-600 font-medium leading-relaxed mb-6">
+                  An open-source React component library featuring tactile Neo-Brutalist tokens, keyboard navigation, and zero-runtime CSS.
+                </p>
+              </div>
+              <div class="flex items-center gap-3">
+                <button onclick="openProjectModal('Kinetix Neo-Brutal UI', 'Open-source design system and React component library with 1.8k+ GitHub stars, built with WAI-ARIA compliance and Tailwind CSS presets.', ['React', 'Tailwind CSS', 'Storybook', 'NPM'])" class="brutal-btn bg-brutalGreen border-2 border-ink rounded-xl px-4 py-2 font-extrabold text-xs shadow-brutal-sm">
+                  Case Study &rarr;
+                </button>
+                <a href="#work" onclick="openProjectModal('Kinetix Neo-Brutal UI', 'Open-source package published on NPM under MIT license.', ['React', 'Tailwind CSS'])" class="font-bold text-xs underline decoration-2 underline-offset-4 hover:text-neutral-600">
+                  GitHub Repo
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- =========================================================
+           FOOTER / CONTACT CTA BAR INSIDE THE FRAME
+           ========================================================= -->
+      <footer id="contact" class="bg-brutalYellow brutal-border rounded-2xl p-7 sm:p-10 shadow-brutal flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <h3 class="font-display font-bold text-2xl sm:text-3xl text-ink mb-1">
+            Have a project in mind?
+          </h3>
+          <p class="text-sm sm:text-base font-semibold text-neutral-800">
+            Let's turn your idea into a fast, memorable web experience.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button onclick="copyEmail()" id="copy-email-btn" class="brutal-btn bg-white brutal-border rounded-xl px-5 py-3 font-extrabold text-sm text-ink shadow-brutal-sm inline-flex items-center gap-2">
+            <span>hello@alex.codes</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- =========================================================
+       CUSTOM NEO-BRUTALIST MODAL (NO ALERT() USED)
+       ========================================================= -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/50 backdrop-blur-[2px] p-4">
+    <div class="bg-surface brutal-border-thick rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-brutal-lg relative animate-float" style="--rot: 0deg;">
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <h4 id="modal-title" class="font-extrabold text-2xl text-ink">Project Title</h4>
+        <button onclick="closeProjectModal()" class="w-9 h-9 bg-brutalPink border-2 border-ink rounded-lg shadow-brutal-sm font-extrabold text-ink flex items-center justify-center hover:opacity-90">
+          ✕
+        </button>
+      </div>
+      <p id="modal-desc" class="text-sm sm:text-base text-neutral-700 font-medium leading-relaxed mb-5"></p>
+      <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
+      <div class="flex justify-end">
+        <button onclick="closeProjectModal()" class="brutal-btn bg-brutalYellow border-2 border-ink rounded-xl px-5 py-2.5 font-extrabold text-sm shadow-brutal-sm">
+          Close Preview
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Clipboard Copy -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-brutalGreen brutal-border rounded-xl px-5 py-3 shadow-brutal font-extrabold text-sm text-ink">
+    Copied hello@alex.codes to clipboard!
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Project Modal Functions
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalTags = document.getElementById('modal-tags');
+
+    function openProjectModal(title, description, tags) {
+      modalTitle.textContent = title;
+      modalDesc.textContent = description;
+      modalTags.innerHTML = tags.map(tag => 
+        `<span class="text-xs font-mono font-bold bg-brutalBlue/30 border-2 border-ink px-2.5 py-1 rounded-md">${tag}</span>`
+      ).join('');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProjectModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close modal on outside click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeProjectModal();
+    });
+
+    // Safe Clipboard Copy with Toast Message
+    function copyEmail() {
+      const tempInput = document.createElement('input');
+      tempInput.value = 'hello@alex.codes';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      const toast = document.getElementById('toast');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2800);
+    }
+  </script>
+</body>
+</html>
